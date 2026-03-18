@@ -116,8 +116,6 @@ kubectl apply -f cluster-issuer.yaml
 ```
 
 #### 2. Update /etc/hosts
-Map the NiFi internal domain name to that Minikube IP. This allows your browser to find the cluster.
-
 ```text
 # Add this line to /etc/hosts
 127.0.0.1 mynifi-web.mynifi.cfm-streaming.svc.cluster.local
