@@ -72,16 +72,15 @@ helm install csa-operator --namespace cld-streaming \
 ```terminal
 helm install cfm-operator oci://container.repository.cloudera.com/cloudera-helm/cfm-operator/cfm-operator \
   --namespace cfm-streaming \
-  --version 2.11.0-b57 \
+  --version 3.0.0-b126 \
   --set installCRDs=true \
   --set image.repository=container.repository.cloudera.com/cloudera/cfm-operator \
-  --set image.tag=2.11.0-b57 \
+  --set image.tag=3.0.0-b126 \
   --set "image.imagePullSecrets[0].name=cloudera-creds" \
   --set "imagePullSecrets={cloudera-creds}" \
   --set "authProxy.image.repository=container.repository.cloudera.com/cloudera_thirdparty/hardened/kube-rbac-proxy" \
   --set "authProxy.image.tag=0.19.0-r3-202503182126" \
-  --set licenseSecret=cfm-operator-license \
-  --set-file clouderaLicense.fileContent=./license.txt
+  --set licenseSecret=cfm-operator-license
 ```
 
 ### Install Kafka 
