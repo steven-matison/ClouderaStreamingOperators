@@ -96,23 +96,15 @@ kubectl apply --filename kafka-eval.yaml,kafka-nodepool.yaml --namespace cld-str
 kubectl apply -f cluster-issuer.yaml
 ```
 
-#### 2. Identify Connectivity Info
-Get the internal IP of the Minikube VM. This is the "Entry Point" for your traffic.
-
-```bash
-minikube ip
-# Example Output: 192.168.49.2
-```
-
-#### 3. Update /etc/hosts
+#### 2. Update /etc/hosts
 Map the NiFi internal domain name to that Minikube IP. This allows your browser to find the cluster.
 
 ```text
 # Add this line to /etc/hosts
-192.168.49.2  mynifi-web.cfm-streaming.svc.cluster.local
+127.0.0.1 mynifi-web.cfm-streaming.svc.cluster.local
 ```
 
-#### 4. Apply NiFi CR
+#### 3. Apply NiFi CR
 
 Nifi 1.28.1
 ```terminal
