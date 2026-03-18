@@ -5,7 +5,7 @@ metadata:
   namespace: cfm-streaming
 spec:
   replicas: 1
-  nifiVersion: "1.28.1"
+  nifiVersion: "2.6.0"
   image:
     repository: container.repository.cloudera.com/cloudera/cfm-nifi-k8s
     tag: 3.0.0-b126-nifi_1.28.1.2.3.17.0-9
