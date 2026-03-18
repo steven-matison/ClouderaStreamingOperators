@@ -7,14 +7,14 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    # This now matches your pod exactly
+    # Matching your specific pod labels
     app.kubernetes.io/instance: mynifi
     app.kubernetes.io/name: server
   ports:
     - name: nifi-https
       protocol: TCP
-      port: 443
-      targetPort: 8443
+      port: 443        # Port the Ingress talks to
+      targetPort: 8443 # Port NiFi listens on inside the pod
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -25,6 +25,7 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
+  ingressClassName: nginx
   rules:
   - host: mynifi-web.cfm-streaming.svc.cluster.local
     http:

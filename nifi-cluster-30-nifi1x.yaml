@@ -1,7 +1,7 @@
 apiVersion: cfm.cloudera.com/v1alpha1
 kind: Nifi
 metadata:
-  name: mynifi-30x-1
+  name: mynifi
   namespace: cfm-streaming
 spec:
   replicas: 1
