@@ -57,6 +57,7 @@ helm install csa-operator --namespace cld-streaming \
     --set 'ssb.sse.image.imagePullSecrets[0].name=cloudera-creds' \
     --set 'ssb.sqlRunner.image.imagePullSecrets[0].name=cloudera-creds' \
     --set 'ssb.mve.image.imagePullSecrets[0].name=cloudera-creds' \
+    --set 'ssb.database.imagePullSecrets[0].name=cloudera-creds' \
     --set-file flink-kubernetes-operator.clouderaLicense.fileContent=./license.txt \
     oci://container.repository.cloudera.com/cloudera-helm/csa-operator/csa-operator 
 ```
@@ -95,18 +96,43 @@ kubectl apply --filename kafka-eval.yaml,kafka-nodepool.yaml --namespace cld-str
 ### Open the UIs
 ```terminal
 minikube service mynifi-web --namespace cfm-streaming
+```
+#### Cloudera Surveyor
+```terminal
 minikube service cloudera-surveyor-service --namespace cld-streaming
+```
+
+#### Schema Registry
+```terminal
 minikube service schema-registry-service --namespace cld-streaming
+```
+
+#### SQL Stream Builder
+```terminal
 minikube service ssb-sse --namespace cld-streaming
 ```
 
 ### Uninstall Commands
 ```terminal
-helm uninstall cfm-operator --namespace cld-streaming
-helm uninstall cloudera-surveyor --namespace cld-streaming
-helm uninstall strimzi-operator --namespace cld-streaming
-helm uninstall schema-registry --namespace cld-streaming
-helm uninstall csa-operator --namespace cld-streaming
+helm uninstall cfm-operator --namespace cfm-streaming
+```
 
+```terminal
+helm uninstall cloudera-surveyor --namespace cld-streaming
+```
+
+```terminal
+helm uninstall strimzi-operator --namespace cld-streaming
+```
+
+```terminal
+helm uninstall schema-registry --namespace cld-streaming
+```
+
+```terminal
+helm uninstall csa-operator --namespace cld-streaming
+```
+
+```terminal
 minikube delete
 ```
