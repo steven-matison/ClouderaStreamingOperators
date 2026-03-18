@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mynifi-web
+  namespace: cfm-streaming
+spec:
+  type: ClusterIP
+  selector:
+    # This now matches your pod exactly
+    app.kubernetes.io/instance: mynifi
+    app.kubernetes.io/name: server
+  ports:
+    - name: nifi-https
+      protocol: TCP
+      port: 443
+      targetPort: 8443
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mynifi-ingress
+  namespace: cfm-streaming
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+spec:
+  rules:
+  - host: mynifi-web.cfm-streaming.svc.cluster.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mynifi-web
+            port:
+              name: nifi-https
