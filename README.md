@@ -101,7 +101,7 @@ Map the NiFi internal domain name to that Minikube IP. This allows your browser 
 
 ```text
 # Add this line to /etc/hosts
-127.0.0.1 mynifi-web.cfm-streaming.svc.cluster.local
+127.0.0.1 mynifi-web.mynifi.cfm-streaming.svc.cluster.local
 ```
 
 #### 3. Apply NiFi CR
@@ -132,7 +132,7 @@ kubectl get endpoints mynifi-web -n cfm-streaming
 ```terminal
 sudo minikube tunnel
 ```
-  Open browser to:  **URL:** `https://mynifi-web.cfm-streaming.svc.cluster.local/nifi/`
+  Open browser to:  **URL:** `https://mynifi-web.mynifi.cfm-streaming.svc.cluster.local/nifi/`
 
 #### Surveyor
 ```terminal
