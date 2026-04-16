@@ -2,17 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kafka-metrics
-  namespace: cld-streaming # Ensure this matches your Kafka namespace
-  labels:
-    app: strimzi
+  namespace: cld-streaming
 data:
   kafka-metrics-config.yaml: |
     lowercaseOutputName: true
     rules:
-      - pattern: ".*"
-      #- pattern: "kafka.server<type=(.+), name=(.+)><>(Count|Value)"
-      #  name: "kafka_server_$1_$2"
-      #- pattern: "kafka.controller<type=(.+), name=(.+)><>(Count|Value)"
-      #  name: "kafka_controller_$1_$2"
-      #- pattern: "kafka.network<type=(.+), name=(.+)><>(Count|Value)"
-      #  name: "kafka_network_$1_$2"
+    # This rule extracts the 'topic' and 'name' into proper labels
+    - pattern: "kafka.server<type=(.+), name=(.+), topic=(.+)><>(Count|Value)"
+      name: "kafka_server_$1_$2"
+      labels:
+        topic: "$3"
+    # Keep the catch-all at the bottom so you don't lose other metrics
+    - pattern: ".*"
