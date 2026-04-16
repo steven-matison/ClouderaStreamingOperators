@@ -176,7 +176,7 @@ helm uninstall cloudera-surveyor --namespace cld-streaming
 ```
 
 ```terminal
-helm uninstall strimzi-operator --namespace cld-streaming
+helm uninstall strimzi-cluster-operator --namespace cld-streaming
 ```
 
 ```terminal
